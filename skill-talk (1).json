@@ -1,0 +1,428 @@
+{
+  "intents": [
+    {
+      "intent": "hc",
+      "examples": [
+        {
+          "text": "cold"
+        },
+        {
+          "text": "hot"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Size",
+      "examples": [
+        {
+          "text": "L"
+        },
+        {
+          "text": "M"
+        },
+        {
+          "text": "S"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "sugar",
+      "examples": [
+        {
+          "text": "with"
+        },
+        {
+          "text": "without"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Welc",
+      "examples": [
+        {
+          "text": "hello"
+        },
+        {
+          "text": "hi"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "Cake",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Apple cake",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Carrot cake",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Cheesecake",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Chocolate cake",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Coconut cake",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Cupcake",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Ice cream cake",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Lemon cake",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "Coffee",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "caramel",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "coffee",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "espresso",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "mocha",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "white mocha",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-number",
+      "values": [],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_1_1626121047396",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_2_1626121064657",
+      "context": {
+        "number": "@sys-number"
+      },
+      "conditions": "@sys-number",
+      "event_name": "input",
+      "dialog_node": "handler_1_1626121064717"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "How many pieces"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_2_1626121064657",
+      "event_name": "focus",
+      "dialog_node": "handler_2_1626121064717",
+      "previous_sibling": "handler_1_1626121064717"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "hot or cold"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_3_1626120410507",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1626120410508",
+      "previous_sibling": "handler_8_1626120410508"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "with sugar or without"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_1_1626120439598",
+      "event_name": "focus",
+      "dialog_node": "handler_7_1626120439598",
+      "previous_sibling": "handler_9_1626120439598"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_3_1626120410507",
+      "context": {
+        "hc": "#hc"
+      },
+      "conditions": "#hc",
+      "event_name": "input",
+      "dialog_node": "handler_8_1626120410508"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_8_1626120386925",
+      "context": {
+        "Size": "#Size"
+      },
+      "conditions": "#Size",
+      "event_name": "input",
+      "dialog_node": "handler_9_1626120386969"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "What size of cup?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_8_1626120386925",
+      "event_name": "focus",
+      "dialog_node": "handler_9_1626120386970",
+      "previous_sibling": "handler_9_1626120386969"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1626120439598",
+      "context": {
+        "sugar": "#sugar"
+      },
+      "conditions": "#sugar",
+      "event_name": "input",
+      "dialog_node": "handler_9_1626120439598"
+    },
+    {
+      "type": "frame",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Your order will be prepared."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@Coffee",
+      "dialog_node": "node_10_1626119825754",
+      "previous_sibling": "node_1_1626118953624"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Please tell me your order"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Welc",
+      "dialog_node": "node_1_1626118953624",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "frame",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Your order will be prepared"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@Cake",
+      "dialog_node": "node_1_1626121047396",
+      "previous_sibling": "node_10_1626119825754"
+    },
+    {
+      "type": "slot",
+      "parent": "node_10_1626119825754",
+      "variable": "$sugar",
+      "dialog_node": "slot_1_1626120439598",
+      "previous_sibling": "slot_3_1626120410507"
+    },
+    {
+      "type": "slot",
+      "parent": "node_1_1626121047396",
+      "variable": "$number",
+      "dialog_node": "slot_2_1626121064657"
+    },
+    {
+      "type": "slot",
+      "parent": "node_10_1626119825754",
+      "variable": "$hc",
+      "dialog_node": "slot_3_1626120410507",
+      "previous_sibling": "slot_8_1626120386925"
+    },
+    {
+      "type": "slot",
+      "parent": "node_10_1626119825754",
+      "variable": "$Size",
+      "dialog_node": "slot_8_1626120386925"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hi"
+              },
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "intent_classification": {
+      "training_backend_version": "v2"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "talk",
+  "language": "en",
+  "description": ""
+}
